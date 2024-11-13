@@ -19,7 +19,9 @@ const ActualizarTarea = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`http://localhost:3000/api/tareas/${state.tarea._id}`, {
+            const backendURL = import.meta.env.VITE_BACKEND_URL;  // Usamos la variable de entorno
+
+            const response = await fetch(`${backendURL}/api/tareas/${state.tarea._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

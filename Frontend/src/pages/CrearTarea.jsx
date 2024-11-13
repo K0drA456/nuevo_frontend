@@ -13,7 +13,9 @@ const CrearTarea = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`http://localhost:3000/api/tareas`, {
+            const backendURL = import.meta.env.VITE_BACKEND_URL;  // Usamos la variable de entorno
+
+            const response = await fetch(`${backendURL}/api/tareas`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

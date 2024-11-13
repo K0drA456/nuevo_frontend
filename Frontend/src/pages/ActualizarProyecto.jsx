@@ -22,7 +22,9 @@ const ActualizarProyecto = () => {
         if (fechaFin) proyectoData.fechaFin = fechaFin;
 
         try {
-            const response = await fetch(`http://localhost:3000/api/proyectos/${id}`, {
+            const backendURL = import.meta.env.VITE_BACKEND_URL;  // Usamos la variable de entorno
+
+            const response = await fetch(`${backendURL}/api/proyectos/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

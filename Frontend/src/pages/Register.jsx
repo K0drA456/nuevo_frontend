@@ -10,20 +10,29 @@ const Register = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
 
-        const response = await fetch('http://localhost:3000/api/auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ nombre, email, password })
-        });
+        const backendURL = import.meta.env.VITE_BACKEND_URL;  // Usamos la variable de entorno
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            alert(`Error: ${errorData.message || 'Ya existe un usuario con este email'}`);
-        } else {
-            const data = await response.json();
-            console.log(data);
+        try {
+            const response = await fetch(`${backendURL}/api/auth/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ nombre, email, password })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                alert(`Error: ${errorData.message || 'Ya existe un usuario con este email'}`);
+            } else {
+                const data = await response.json();
+                console.log(data);
+                alert('Usuario registrado con éxito');
+                // Redirigir al login o al home después del registro exitoso
+            }
+        } catch (error) {
+            console.error('Error al registrar:', error);
+            alert('Hubo un problema al registrar al usuario');
         }
     };
 

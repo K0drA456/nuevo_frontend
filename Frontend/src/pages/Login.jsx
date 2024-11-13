@@ -11,7 +11,9 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:3000/api/auth/login', {
+            const backendURL = import.meta.env.VITE_BACKEND_URL;  // Usamos la variable de entorno
+
+            const response = await fetch(`${backendURL}/api/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -23,6 +25,7 @@ const Login = () => {
 
             if (response.ok) {
                 localStorage.setItem('token', data.token);
+                localStorage.setItem('userId', data.userId);  // Asumiendo que el userId también se devuelve
                 alert('Inicio de sesión exitoso');
                 navigate('/proyectosFron');
             } else {
@@ -60,4 +63,3 @@ const Login = () => {
 };
 
 export default Login;
-

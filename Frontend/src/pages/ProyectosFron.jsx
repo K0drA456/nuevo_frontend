@@ -8,12 +8,15 @@ const ProyectosFron = () => {
 
     const cargarProyectos = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/proyectos', {
+            const backendURL = import.meta.env.VITE_BACKEND_URL;  // Usamos la variable de entorno
+
+            const response = await fetch(`${backendURL}/api/proyectos`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             });
+
             const data = await response.json();
             setProyectos(data);
         } catch (error) {
@@ -28,7 +31,9 @@ const ProyectosFron = () => {
     const handleDeleteProject = async (projectId) => {
         if (window.confirm('¿Estás seguro de que quieres eliminar este proyecto y todas sus tareas?')) {
             try {
-                const response = await fetch(`http://localhost:3000/api/proyectos/${projectId}`, {
+                const backendURL = import.meta.env.VITE_BACKEND_URL;  // Usamos la variable de entorno
+
+                const response = await fetch(`${backendURL}/api/proyectos/${projectId}`, {
                     method: 'DELETE',
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`

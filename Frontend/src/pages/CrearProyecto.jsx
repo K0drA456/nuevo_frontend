@@ -21,7 +21,9 @@ const CrearProyecto = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:3000/api/proyectos', {
+            const backendURL = import.meta.env.VITE_BACKEND_URL;  // Usamos la variable de entorno
+
+            const response = await fetch(`${backendURL}/api/proyectos`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -61,21 +63,18 @@ const CrearProyecto = () => {
                     value={descripcion} 
                     onChange={(e) => setDescripcion(e.target.value)} 
                     placeholder="Descripción del Proyecto" 
-                    
                 />
                 <input 
                     type="date" 
                     className="proyecto-input" 
                     value={fechaInicio} 
                     onChange={(e) => setFechaInicio(e.target.value)} 
-                    
                 />
                 <input 
                     type="date" 
                     className="proyecto-input" 
                     value={fechaFin} 
                     onChange={(e) => setFechaFin(e.target.value)} 
-                    
                 />
                 <button type="submit" className="proyecto-boton">Crear Proyecto</button>
             </form>

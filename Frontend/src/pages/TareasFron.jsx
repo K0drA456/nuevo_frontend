@@ -8,8 +8,10 @@ const TareasFron = () => {
     const navigate = useNavigate();
 
     const cargarTareas = async () => {
+        const backendURL = import.meta.env.VITE_BACKEND_URL;  // Usamos la variable de entorno
+
         try {
-            const response = await fetch(`http://localhost:3000/api/tareas/${id}`, {
+            const response = await fetch(`${backendURL}/api/tareas/${id}`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -34,8 +36,10 @@ const TareasFron = () => {
 
     const handleDelete = async (tareaId) => {
         if (window.confirm('¿Estás seguro de que quieres eliminar esta tarea?')) {
+            const backendURL = import.meta.env.VITE_BACKEND_URL;  // Usamos la variable de entorno
+
             try {
-                const response = await fetch(`http://localhost:3000/api/tareas/${tareaId}`, {
+                const response = await fetch(`${backendURL}/api/tareas/${tareaId}`, {
                     method: 'DELETE',
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -64,7 +68,7 @@ const TareasFron = () => {
     };
 
     const handleBackToProjects = () => {
-        navigate('/ProyectosFron'); // Redirigir a la lista de proyectossss
+        navigate('/ProyectosFron'); // Redirigir a la lista de proyectos
     };
 
     return (
